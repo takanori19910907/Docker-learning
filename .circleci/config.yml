@@ -6,11 +6,10 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.7
-    
     working_directory: ~/rearn-to-docker/src
     steps:
       - checkout:
-        path: ~/rearn-to-docker
+          path: ~/rearn-to-docker
       - ruby/install-deps
 
   test:
@@ -26,17 +25,17 @@ jobs:
       BUNDLE_RETRY: "3"
       APP_DATABASE_HOST: "127.0.0.1"
       RAILS_ENV: test
-      working_directory: working_directory: ~/rearn-to-docker/src
+      working_directory: ~/rearn-to-docker/src
       steps:
         - checkout:
-          path: working_directory: ~/rearn-to-docker
+            path: ~/rearn-to-docker
         - ruby/install-deps
         - run:
-          name: Database setup
-          command: bundle exec rails db:migrate
+            name: Database setup
+            command: bundle exec rails db:migrate
         - run:
-          name: test
-          command: bundle exec rake test
+            name: test
+            command: bundle exec rake test
 
 workflows:
   version: 2
@@ -46,4 +45,3 @@ workflows:
       - test:
         requires:
           - build
-
